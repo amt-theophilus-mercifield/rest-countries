@@ -1,12 +1,17 @@
 import './App.css'
-import { HomePage } from './components/HomePage'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom' 
+import { Countries } from './components/Countries'
+import { Header } from './components/Header'
 
 function App() {
   
   return (
-    <>
-      <HomePage />
-    </>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path='/' element={<Countries />} />
+      </Routes>
+    </Router>
   )
 }
 

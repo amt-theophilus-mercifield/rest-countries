@@ -1,9 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+:root {
+    --body_background: hsl(0, 0%, 98%);
+    --body_color: hsl(200, 15%, 8%);
+    --elements_color: hsl(0, 0%, 100%);
+    --input_color: hsl(0, 0%, 52%);
+}
+
+[data-theme='dark'] {
+    --body_background: hsl(207, 26%, 17%);
+    --body_color: hsl(0, 0%, 100%);
+    --elements_color: hsl(209, 23%, 22%);
+    --input_color: hsl(0, 0%, 52%);
+}
+
 body {
     font-family: 'Nunito Sans', sans-serif;
+    background: var(--body_background);
+    color: var(--body_color);
 }
+
+input {
+    background-color: var(--elements_color);
+    color: var(--input_color);
+}
+
+.styledHeader {
+    background: var(--elements_color);
+}
+
