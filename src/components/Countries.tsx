@@ -18,10 +18,10 @@ const filterApi = axios.create({
 export const Countries = () => {
   const [countries, setCountries] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [filterRegion, setFilterRegion] = useState("")
+  const [filterRegion, setFilterRegion] = useState("");
 
   const regions = [
-    // {},
+    { name: "Filter by region" },
     { name: "Africa" },
     { name: "Asia" },
     { name: "Europe" },
@@ -59,6 +59,7 @@ export const Countries = () => {
 
   const filterCountry = async (region: string) => {
     try {
+        if (region === "Filter by region") return
       await filterApi.get(`/${region}`).then((res) => {
         setCountries(res.data);
       });
@@ -110,7 +111,10 @@ export const Countries = () => {
                 id="filter-by-region"
                 className="outline-none w-full pl-[20px]"
                 value={filterRegion}
-                onChange={(e) => {filterCountry(e.target.value); setFilterRegion(e.target.value)}}
+                onChange={(e) => {
+                  filterCountry(e.target.value);
+                  setFilterRegion(e.target.value);
+                }}
                 onSubmit={handleFilter}
               >
                 {regions.map((region, index) => (
