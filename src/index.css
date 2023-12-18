@@ -3,37 +3,52 @@
 @tailwind utilities;
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --body_background: hsl(0, 0%, 98%);
-    --body_color: hsl(200, 15%, 8%);
-    --elements_color: hsl(0, 0%, 100%);
-    --input_color: hsl(0, 0%, 52%);
+  --body_background: hsl(0, 0%, 98%);
+  --body_color: hsl(200, 15%, 8%);
+  --elements_color: hsl(0, 0%, 100%);
+  --input_color: hsl(0, 0%, 52%);
 }
 
-[data-theme='dark'] {
-    --body_background: hsl(207, 26%, 17%);
-    --body_color: hsl(0, 0%, 100%);
-    --elements_color: hsl(209, 23%, 22%);
-    --input_color: hsl(0, 0%, 52%);
+[data-theme="dark"] {
+  --body_background: hsl(207, 26%, 17%);
+  --body_color: hsl(0, 0%, 100%);
+  --elements_color: hsl(209, 23%, 22%);
+  --input_color: hsl(0, 0%, 52%);
 }
 
 body {
-    font-family: 'Nunito Sans', sans-serif;
-    background: var(--body_background);
+  font-family: "Nunito Sans", sans-serif;
+  background: var(--body_background);
+  color: var(--body_color);
+}
+
+.styledHeader,
+.styledBorder,
+.styledCard,
+.styledBtn,
+.styledForm {
+  background: var(--elements_color);
+}
+
+.styledForm ::placeholder {
     color: var(--body_color);
 }
 
-input {
-    background-color: var(--elements_color);
-    color: var(--input_color);
+.styledInput,
+select {
+  background: var(--elements_color);
+  color: var(--body_color);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
 }
 
-.styledHeader {
-    background: var(--elements_color);
+a {
+  font-family: "Nunito Sans", sans-serif;
 }
-
