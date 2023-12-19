@@ -34,6 +34,10 @@ export const Countries = () => {
     baseURL: `https://restcountries.com/v3.1/name/${searchText}`,
   });
 
+  useEffect(()=>{
+    document.title = "Uniik's Countries App";
+  },[])
+
   useEffect(() => {
     const getCountries = async () => {
       try {

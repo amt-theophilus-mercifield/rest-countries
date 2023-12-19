@@ -18,17 +18,19 @@ export const SingleCountry = (props: Props) => {
     const getCountry = async () => {
       try {
         await api.get("/").then((res) => {
-        //   console.log(Object.keys(res.data)[0]);
-        //   console.log(res.data[Object.keys(res.data)[0]])
           setCountry(res.data);
-          console.log(country)
+          // console.log(country)
         });
       } catch (error) {
         console.error(error);
       }
     };
     getCountry();
-  }, []);
+  }, [country]);
+
+  useEffect(()=>{
+    document.title = `${newName} Details`;
+  },[newName])
 
   return (
     <>
