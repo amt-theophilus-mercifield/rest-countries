@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export interface Props {
-  flags;
-  name: {
-    common: string;
+interface Props {
+  flags: {
+    svg: string;
   };
+  name: string;
   population: number;
   region: string;
   subregion: string;
@@ -19,15 +19,15 @@ export const Article = ({
   subregion,
 }: Props) => {
   return (
-    <Link to={`/${name.common}}`}>
+    <Link to={`/${name}}`}>
       <Card className="styledCard my-11 md:my-13 lg:my-15 rounded-lg shadow overflow-hidden">
         <img
           src={flags.svg}
-          alt={name.common}
+          alt={name}
           className="object-cover w-full overflow-hidden"
         />
         <div className="p-4">
-          <h2 className="font-bold text-lg mb-2">{name.common}</h2>
+          <h2 className="font-bold text-lg mb-2">{name}</h2>
           <ul className="flex flex-col items-start justify-center gap-2">
             <li>Population: {population.toLocaleString()}</li>
             <li>Region: {region}</li>

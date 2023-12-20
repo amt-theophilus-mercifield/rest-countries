@@ -3,10 +3,17 @@ import styled from "styled-components";
 import axios from "axios";
 import { Article } from "./Article";
 
-
-// interface Props {
-
-// }
+interface Country {
+  Name: {
+    common: string;
+  },
+  flags: {
+    svg: string;
+  };
+  population: number;
+  region: string;
+  subregion: string;
+}
 
 const api = axios.create({
   baseURL: `https://restcountries.com/v3.1/all`,
@@ -35,9 +42,9 @@ export const Countries = () => {
     baseURL: `https://restcountries.com/v3.1/name/${searchText}`,
   });
 
-  useEffect(()=>{
+  useEffect(() => {
     document.title = "Uniik's Countries App";
-  },[])
+  }, []);
 
   useEffect(() => {
     const getCountries = async () => {
@@ -64,7 +71,7 @@ export const Countries = () => {
 
   const filterCountry = async (region: string) => {
     try {
-        if (region === "Filter by region") return
+      if (region === "Filter by region") return;
       await filterApi.get(`/${region}`).then((res) => {
         setCountries(res.data);
       });
@@ -73,14 +80,14 @@ export const Countries = () => {
     }
   };
 
-  const handleSearch = (e:React.FormEvent) => {
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     console.log(searchText);
     searchCountry();
     setSearchText("");
   };
 
-  const handleFilter = (e:React.FormEvent) => {
+  const handleFilter = (e: React.FormEvent) => {
     e.preventDefault();
     // filterCountry(region);
   };
@@ -130,10 +137,17 @@ export const Countries = () => {
               </select>
             </StyledForm>
           </Section>
-          <Section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center ">
-            {countries.map((country: object) => {
-              return <Article key={country.name.common} {...country} />;
-            })}
+          <Section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center">
+            {countries.map((country: Country) => (
+              <Article
+                key={country.Name.common}
+                flags={country.flags}
+                name={country.Name.common}
+                population={country.population}
+                region={country.region}
+                subregion={country.subregion}
+              />
+            ))}
           </Section>
         </Container>
       )}
