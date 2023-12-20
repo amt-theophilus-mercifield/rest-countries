@@ -4,7 +4,7 @@ import axios from "axios";
 import { Article } from "./Article";
 
 interface Country {
-  Name: {
+  name: {
     common: string;
   },
   flags: {
@@ -34,7 +34,6 @@ export const Countries = () => {
     { name: "Asia" },
     { name: "Europe" },
     { name: "Americas" },
-    { name: "Antarctica" },
     { name: "Oceania" },
   ];
 
@@ -50,7 +49,7 @@ export const Countries = () => {
     const getCountries = async () => {
       try {
         await api.get("/").then((res) => {
-          setCountries(res.data.slice(0, 10));
+          setCountries(res.data);
         });
       } catch (error) {
         console.error(error);
@@ -140,9 +139,9 @@ export const Countries = () => {
           <Section className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 place-items-center">
             {countries.map((country: Country) => (
               <Article
-                key={country.Name.common}
+                key={country.name.common}
                 flags={country.flags}
-                name={country.Name.common}
+                name={country.name.common}
                 population={country.population}
                 region={country.region}
                 subregion={country.subregion}
