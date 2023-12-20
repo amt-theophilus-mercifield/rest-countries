@@ -46,7 +46,7 @@ export const SingleCountry = () => {
       }
     };
     getCountry();
-  }, [country]);
+  }, [api, country]);
 
   useEffect(() => {
     document.title = `${newName} Details`;
