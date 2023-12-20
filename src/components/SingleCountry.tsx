@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styled from "styled-components";
 
-// interface Props {}
 
-export const SingleCountry = (props: Props) => {
+
+export const SingleCountry = () => {
   const [country, setCountry] = useState([]);
   const { name } = useParams();
   const newName = name?.replace("}", "");
@@ -57,7 +57,7 @@ export const SingleCountry = (props: Props) => {
               <h3 className="font-bold text-lg mt-8 ">Border Countries:</h3>
               <ul className=" flex flex-wrap items-start justify-start gap-8 mt-4">
                 {item.borders &&
-                  item.borders.map((border, index) => (
+                  item.borders.map((border, index:number) => (
                     <li className="styledBorder flex flex-1 justify-center py-2 rounded shadow-md" key={index}>{border}</li>
                   ))}
               </ul>

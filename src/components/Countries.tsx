@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import axios from "axios";
 import { Article } from "./Article";
+
 
 // interface Props {
 
@@ -16,7 +17,7 @@ const filterApi = axios.create({
 });
 
 export const Countries = () => {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState<[]>([]);
   const [searchText, setSearchText] = useState("");
   const [filterRegion, setFilterRegion] = useState("");
 
@@ -72,14 +73,14 @@ export const Countries = () => {
     }
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = (e:React.FormEvent) => {
     e.preventDefault();
     console.log(searchText);
     searchCountry();
     setSearchText("");
   };
 
-  const handleFilter = (e) => {
+  const handleFilter = (e:React.FormEvent) => {
     e.preventDefault();
     // filterCountry(region);
   };

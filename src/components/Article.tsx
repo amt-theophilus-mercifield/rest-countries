@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-interface Props {
-  flags: object;
+export interface Props {
+  flags;
   name: {
     common: string;
   };
