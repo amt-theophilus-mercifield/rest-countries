@@ -49,6 +49,19 @@ select {
   line-height: 20px;
 }
 
+/* .regionOptions { */
+  /* padding-top: 8px;
+  height: 114px; */
+/* } */
+
+.select-items div,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
 a {
   font-family: "Nunito Sans", sans-serif;
 }

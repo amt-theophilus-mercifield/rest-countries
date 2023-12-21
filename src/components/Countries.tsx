@@ -6,7 +6,7 @@ import { Article } from "./Article";
 interface Country {
   name: {
     common: string;
-  },
+  };
   flags: {
     svg: string;
   };
@@ -49,7 +49,7 @@ export const Countries = () => {
     const getCountries = async () => {
       try {
         await api.get("/").then((res) => {
-          setCountries(res.data);
+          setCountries(res.data.slice(1, 12));
         });
       } catch (error) {
         console.error(error);
@@ -81,7 +81,6 @@ export const Countries = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(searchText);
     searchCountry();
     setSearchText("");
   };
@@ -120,7 +119,7 @@ export const Countries = () => {
               <select
                 name="filter-by-region"
                 id="filter-by-region"
-                className="outline-none w-full pl-[20px]"
+                className="outline-none w-full pl-[20px] cursor-pointer"
                 value={filterRegion}
                 onChange={(e) => {
                   filterCountry(e.target.value);
@@ -129,7 +128,12 @@ export const Countries = () => {
                 onSubmit={handleFilter}
               >
                 {regions.map((region, index) => (
-                  <option key={index} value={region.name}>
+                  <option
+                    // disabled={region.name === "Filter by region"}
+                    className="regionOptions"
+                    key={index}
+                    value={region.name}
+                  >
                     {region.name}
                   </option>
                 ))}

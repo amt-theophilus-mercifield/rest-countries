@@ -13,8 +13,8 @@ interface CountryItem {
     nativeName: {
       eng?: {
         common: string;
-      }
-    }
+      };
+    };
   };
   population: number;
   region: string;
@@ -27,6 +27,7 @@ interface CountryItem {
 
 export const SingleCountry = () => {
   const [country, setCountry] = useState([]);
+  // const [borderCode, setBorderCode] = useState("");
   const { name } = useParams();
   const newName = name?.replace("}", "");
 
@@ -34,19 +35,33 @@ export const SingleCountry = () => {
     baseURL: `https://restcountries.com/v3.1/name/${newName}`,
   });
 
+  const borderApi = axios.create({
+    baseURL: `https://restcountries.com/v3.1/alpha/`,
+  });
+
+  const getCountry = async () => {
+    try {
+      await api.get("/").then((res) => {
+        setCountry(res.data);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleBorderClick = async (border: string) => {
+    try {
+      await borderApi.get(`/${border}`).then((res) => {
+        setCountry(res.data);
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const getCountry = async () => {
-      try {
-        await api.get("/").then((res) => {
-          setCountry(res.data);
-          // console.log(country)
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
     getCountry();
-  }, [api, country]);
+  }, []);
 
   useEffect(() => {
     document.title = `${newName} Details`;
@@ -85,15 +100,21 @@ export const SingleCountry = () => {
                 <li>Capital: {item.capital[0]}</li>
               </ul>
               <h3 className="font-bold text-lg mt-8 ">Border Countries:</h3>
-              <ul className=" flex flex-wrap items-start justify-start gap-8 mt-4">
+              <ul
+                className="flex flex-wrap items-start justify-start gap-8 mt-4"
+                // onClick={handleBorderClick}
+              >
                 {item.borders &&
                   item.borders.map((border, index: number) => (
-                    <li
+                    <button
                       className="styledBorder flex flex-1 justify-center py-2 rounded shadow-md"
                       key={index}
+                      onClick={() => {
+                        handleBorderClick(border);
+                      }}
                     >
                       {border}
-                    </li>
+                    </button>
                   ))}
               </ul>
             </Article>
