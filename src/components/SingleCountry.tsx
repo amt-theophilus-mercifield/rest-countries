@@ -23,6 +23,13 @@ interface CountryItem {
   borders?: string[];
   border: string;
   cca3: string;
+  tld: string;
+  currencies: {
+    pen?: {
+      name: string;
+    }
+  }
+  languages: string[];
 }
 
 export const SingleCountry = () => {
@@ -61,6 +68,7 @@ export const SingleCountry = () => {
 
   useEffect(() => {
     getCountry();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -74,15 +82,15 @@ export const SingleCountry = () => {
           &larr; Back
         </StyledBtn>
       </Link>
-      <Section className="w-full flex justify-between items-center px-4 sm:px-8 md:px-12 lg:px-16 my-20">
+      <Section className="w-full flex flex-col gap-12 justify-between items-center px-4 sm:px-8 md:px-12 lg:px-16 my-20">
         {country.map((item: CountryItem) => (
           <Wrap
             className="flex flex-col lg:flex-row gap-8 lg:justify-center lg:items-center"
             key={item.cca3}
           >
-            <Article className=" imageContainer lg:basis-1/2 mb-12 lg:mb-0">
+            <Article className="imageContainer lg:basis-1/2 mb-12 lg:mb-0">
               <img
-                className="w-full rounded-lg object-cover shadow"
+                className="rounded-lg object-cover shadow w-[320px] h-[229px] max-w-[560px] max-h-[401]"
                 src={item.flags.svg}
                 alt={item.flags.alt}
               />
@@ -92,18 +100,19 @@ export const SingleCountry = () => {
               <ul className="my-4 flex flex-col items-start justify-start gap-2">
                 <li>
                   Native name:{" "}
-                  {item.name.nativeName?.eng?.common || item.name.official}
+                  {Object.values(item.name.nativeName)[0].common ||
+                    item.name.official}
                 </li>
                 <li>Population: {item.population.toLocaleString()}</li>
                 <li>Region: {item.region}</li>
                 <li>Subregion: {item.subregion}</li>
                 <li>Capital: {item.capital[0]}</li>
+                <li>Top Level Domain: {item.tld}</li>
+                <li>Currencies: {Object.values(item.currencies)[0].name}</li>
+                <li>Languages: {Object.values(item.languages).map((language, index)=><span key={index}>{language},</span>)}</li>
               </ul>
               <h3 className="font-bold text-lg mt-8 ">Border Countries:</h3>
-              <ul
-                className="flex flex-wrap items-start justify-start gap-8 mt-4"
-                // onClick={handleBorderClick}
-              >
+              <ul className="flex flex-wrap items-start justify-start gap-8 mt-4">
                 {item.borders &&
                   item.borders.map((border, index: number) => (
                     <button

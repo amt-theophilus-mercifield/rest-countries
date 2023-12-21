@@ -16,7 +16,7 @@ export const Article = ({
   name,
   population,
   region,
-  subregion,
+  subregion
 }: Props) => {
   return (
     <Link to={`/${name}}`}>

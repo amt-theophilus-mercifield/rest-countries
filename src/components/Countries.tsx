@@ -29,7 +29,6 @@ export const Countries = () => {
   const [filterRegion, setFilterRegion] = useState("");
 
   const regions = [
-    { name: "Filter by region" },
     { name: "Africa" },
     { name: "Asia" },
     { name: "Europe" },
@@ -49,7 +48,7 @@ export const Countries = () => {
     const getCountries = async () => {
       try {
         await api.get("/").then((res) => {
-          setCountries(res.data.slice(1, 12));
+          setCountries(res.data);
         });
       } catch (error) {
         console.error(error);
@@ -93,7 +92,7 @@ export const Countries = () => {
   return (
     <Main className="w-full flex justify-between items-center px-4 sm:px-8 md:px-12 lg:px-16">
       {countries.length === 0 ? (
-        <h1 className="font-bold uppercase tracking-wide flex items-center justify-center text-center h-screen text-4xl">
+        <h1 className="font-bold uppercase tracking-wide flex items-center justify-center text-center w-screen h-screen text-4xl">
           loading...
         </h1>
       ) : (
@@ -119,7 +118,7 @@ export const Countries = () => {
               <select
                 name="filter-by-region"
                 id="filter-by-region"
-                className="outline-none w-full pl-[20px] cursor-pointer"
+                className="regionSelect outline-none w-full pl-[20px] cursor-pointer"
                 value={filterRegion}
                 onChange={(e) => {
                   filterCountry(e.target.value);
@@ -127,10 +126,11 @@ export const Countries = () => {
                 }}
                 onSubmit={handleFilter}
               >
+                <option disabled value="" hidden>Filter by Region</option>
                 {regions.map((region, index) => (
                   <option
                     // disabled={region.name === "Filter by region"}
-                    className="regionOptions"
+                    className="regionOptions optionStyle"
                     key={index}
                     value={region.name}
                   >
@@ -148,7 +148,7 @@ export const Countries = () => {
                 name={country.name.common}
                 population={country.population}
                 region={country.region}
-                subregion={country.subregion}
+                subregion={country.subregion}                
               />
             ))}
           </Section>
